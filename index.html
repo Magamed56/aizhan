@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Айжан, это важно ❗</title>
-<meta name="description" content="Нужно твоё подтверждение — займёт 30 секунд.">
+<meta name="description" content="Нужно твоё подтверждение — займёт минуту.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://magamed56.github.io/aizhan/">
 <meta property="og:title" content="Айжан, это важно ❗">
-<meta property="og:description" content="Нужно твоё подтверждение — займёт 30 секунд.">
+<meta property="og:description" content="Нужно твоё подтверждение — займёт минуту.">
 <meta property="og:image" content="https://magamed56.github.io/aizhan/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,21 +20,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap">
 <style>
 :root {
-  --bg: #120a22;
-  --ink: #fff;
-  --ink-2: rgba(255, 255, 255, .76);
-  --muted: rgba(255, 255, 255, .52);
-  --glass: rgba(255, 255, 255, .07);
-  --glass-brd: rgba(255, 255, 255, .14);
-  --pink: #ff4fa3;
-  --violet: #8b5cf6;
-  --orange: #ffb020;
-  --green: #2bd576;
-  --red: #ff4d5e;
+  --bg: #120a22; --ink: #fff; --ink-2: rgba(255,255,255,.76); --muted: rgba(255,255,255,.52);
+  --glass: rgba(255,255,255,.07); --glass-brd: rgba(255,255,255,.14);
+  --pink: #ff4fa3; --violet: #8b5cf6; --orange: #ffb020; --green: #2bd576; --red: #ff4d5e;
   --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
   --sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --spring: cubic-bezier(.34, 1.56, .64, 1);
-  --smooth: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.34,1.56,.64,1); --smooth: cubic-bezier(.2,.8,.2,1);
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
@@ -43,99 +34,72 @@ body {
   min-height: 100vh; min-height: 100dvh;
   background:
     radial-gradient(1100px 700px at 0% 0%, #34166a 0%, transparent 60%),
-    radial-gradient(900px 700px at 100% 100%, #5e1540 0%, transparent 60%),
-    var(--bg);
-  color: var(--ink); font: 16px/1.5 var(--sans);
-  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    radial-gradient(900px 700px at 100% 100%, #5e1540 0%, transparent 60%), var(--bg);
+  color: var(--ink); font: 16px/1.5 var(--sans); overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
 h1:focus, h2:focus { outline: none; }
-
-/* фон: пятна, искры, конфетти */
 .blob { position: fixed; z-index: 0; border-radius: 50%; filter: blur(70px); pointer-events: none; opacity: .5; animation: drift 20s ease-in-out infinite alternate; }
 .b1 { width: 420px; height: 420px; background: var(--violet); top: -140px; left: -120px; }
 .b2 { width: 400px; height: 400px; background: var(--pink); bottom: -160px; right: -140px; animation-duration: 24s; }
 .b3 { width: 280px; height: 280px; background: var(--orange); top: 45%; left: 55%; opacity: .2; animation-duration: 28s; }
-@keyframes drift { to { transform: translate(70px, 50px) scale(1.18); } }
+@keyframes drift { to { transform: translate(70px,50px) scale(1.18); } }
 #sparkles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 #sparkles span { position: absolute; bottom: -40px; opacity: 0; animation: rise linear forwards; }
-@keyframes rise {
-  0% { transform: translateY(0) rotate(0); opacity: 0; }
-  10% { opacity: .55; } 85% { opacity: .35; }
-  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-}
+@keyframes rise { 0% { transform: translateY(0) rotate(0); opacity: 0; } 10% { opacity: .55; } 85% { opacity: .35; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
 #confetti { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 40; pointer-events: none; }
 .fall { position: fixed; top: -60px; z-index: 35; pointer-events: none; animation: fall linear forwards; }
 @keyframes fall { to { transform: translateY(118vh) rotate(540deg); } }
 
-/* карточка и шаги */
 main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: max(64px, calc(env(safe-area-inset-top) + 56px)) 16px max(28px, env(safe-area-inset-bottom)); }
-.card {
-  position: relative; width: min(440px, 100%);
-  background: var(--glass); border: 1px solid var(--glass-brd); border-radius: 28px;
-  padding: 30px 24px 26px;
-  -webkit-backdrop-filter: blur(20px) saturate(150%); backdrop-filter: blur(20px) saturate(150%);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .14);
-}
+.card { position: relative; width: min(440px,100%); background: var(--glass); border: 1px solid var(--glass-brd); border-radius: 28px; padding: 30px 24px 26px; -webkit-backdrop-filter: blur(20px) saturate(150%); backdrop-filter: blur(20px) saturate(150%); box-shadow: 0 30px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.14); }
 .shake { animation: shake .5s; }
-@keyframes shake {
-  10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); }
-  30%, 50%, 70% { transform: translateX(-8px) rotate(-.6deg); } 40%, 60% { transform: translateX(8px) rotate(.6deg); }
-}
+@keyframes shake { 10%,90% { transform: translateX(-2px); } 20%,80% { transform: translateX(4px); } 30%,50%,70% { transform: translateX(-8px) rotate(-.6deg); } 40%,60% { transform: translateX(8px) rotate(.6deg); } }
 .stage { display: none; }
-.stage.active { display: grid; gap: 18px; animation: enter .65s var(--smooth) both; }
-.stage.leaving { display: grid; gap: 18px; animation: leave .33s ease-in both; }
+.stage.active { display: grid; gap: 18px; animation: enter .6s var(--smooth) both; }
+.stage.leaving { display: grid; gap: 18px; animation: leave .32s ease-in both; }
 @keyframes enter { from { opacity: 0; transform: translateY(26px) scale(.97); filter: blur(8px); } }
 @keyframes leave { to { opacity: 0; transform: translateY(-18px) scale(.98); filter: blur(6px); } }
 .stage > * { margin: 0; }
 
-.pill { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 10px; border-radius: 999px; font: 800 11.5px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; background: rgba(255, 77, 94, .14); color: #ff9aa4; border: 1px solid rgba(255, 77, 94, .35); }
+.pill { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 10px; border-radius: 999px; font: 800 11.5px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; background: rgba(255,77,94,.14); color: #ff9aa4; border: 1px solid rgba(255,77,94,.35); }
 .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: ping 1.4s infinite; }
-@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 94, .7); } 70%, 100% { box-shadow: 0 0 0 10px rgba(255, 77, 94, 0); } }
-.pill.good { justify-self: center; background: rgba(43, 213, 118, .14); color: #8ff5bd; border-color: rgba(43, 213, 118, .35); }
-.title { font: 700 clamp(25px, 7vw, 31px)/1.14 var(--display); letter-spacing: -.01em; text-wrap: balance; }
-.title.sm { font-size: clamp(20px, 5.6vw, 24px); }
-.nm { background: linear-gradient(90deg, #ffd166, #ff4fa3 55%, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.text { color: var(--ink-2); }
-.center { text-align: center; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255,77,94,.7); } 70%,100% { box-shadow: 0 0 0 10px rgba(255,77,94,0); } }
+.pill.good { justify-self: center; background: rgba(43,213,118,.14); color: #8ff5bd; border-color: rgba(43,213,118,.35); }
+.title { font: 700 clamp(25px,7vw,31px)/1.14 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.title.sm { font-size: clamp(20px,5.6vw,24px); }
+.nm { background: linear-gradient(90deg,#ffd166,#ff4fa3 55%,#a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.text { color: var(--ink-2); } .center { text-align: center; }
 .fine { color: var(--muted); font-size: 12.5px; text-align: center; }
+.type::after { content: "▋"; margin-left: 1px; color: var(--pink); animation: caret 1s steps(1) infinite; }
+.type.done::after { display: none; }
+@keyframes caret { 50% { opacity: 0; } }
 .hint { min-height: 1.5em; color: var(--ink-2); font-weight: 700; text-align: center; }
 .hint.pop { animation: pop .45s var(--spring); }
 @keyframes pop { from { transform: scale(.7); opacity: 0; } }
 .stephead { display: flex; justify-content: space-between; align-items: center; }
 .steps { display: flex; gap: 6px; }
-.steps i { width: 8px; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .2); }
-.steps i.done { background: rgba(255, 255, 255, .55); }
-.steps i.on { width: 26px; background: linear-gradient(90deg, var(--pink), var(--violet)); }
+.steps i { width: 8px; height: 8px; border-radius: 99px; background: rgba(255,255,255,.2); transition: all .4s var(--spring); }
+.steps i.done { background: rgba(255,255,255,.55); }
+.steps i.on { width: 26px; background: linear-gradient(90deg,var(--pink),var(--violet)); }
 .steplabel { font: 700 11.5px/1 var(--sans); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 
-/* кнопки */
-.btn {
-  position: relative; appearance: none; border: 0; cursor: pointer; overflow: hidden;
-  font: 800 16px/1 var(--sans); color: #fff; padding: 17px 22px; border-radius: 16px;
-  transition: transform .3s var(--spring), box-shadow .25s, opacity .25s;
-  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: manipulation;
-}
+.btn { position: relative; appearance: none; border: 0; cursor: pointer; overflow: hidden; font: 800 16px/1 var(--sans); color: #fff; padding: 17px 22px; border-radius: 16px; transition: transform .3s var(--spring), box-shadow .25s, opacity .25s; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: manipulation; }
 .btn:active { transform: scale(.97); }
 .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-.btn.primary { background: linear-gradient(135deg, var(--pink), var(--violet)); box-shadow: 0 12px 30px rgba(255, 79, 163, .35), inset 0 1px 0 rgba(255, 255, 255, .3); }
-.btn.primary:hover { box-shadow: 0 16px 42px rgba(255, 79, 163, .55), inset 0 1px 0 rgba(255, 255, 255, .3); }
+.btn.primary { background: linear-gradient(135deg,var(--pink),var(--violet)); box-shadow: 0 12px 30px rgba(255,79,163,.35), inset 0 1px 0 rgba(255,255,255,.3); }
+.btn.primary:hover { box-shadow: 0 16px 42px rgba(255,79,163,.55), inset 0 1px 0 rgba(255,255,255,.3); }
 .btn .arrow { display: inline-block; transition: transform .3s var(--spring); }
 .btn:hover .arrow { transform: translateX(5px); }
-.btn.ghost { background: rgba(255, 255, 255, .08); border: 1px solid var(--glass-brd); }
-.shine::after {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .38) 50%, transparent 70%);
-  background-size: 250% 100%; animation: shine 2.6s ease-in-out infinite;
-}
-@keyframes shine { 0% { background-position: 130% 0; } 60%, 100% { background-position: -130% 0; } }
+.btn.ghost { background: rgba(255,255,255,.08); border: 1px solid var(--glass-brd); }
+.btn.wide { width: 100%; }
+.shine::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.38) 50%, transparent 70%); background-size: 250% 100%; animation: shine 2.6s ease-in-out infinite; }
+@keyframes shine { 0% { background-position: 130% 0; } 60%,100% { background-position: -130% 0; } }
 
-/* загрузка */
-.bar { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .1); overflow: hidden; }
-.bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--violet), var(--pink), var(--orange)); transition: width .55s var(--smooth); }
+.bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.1); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg,var(--violet),var(--pink),var(--orange)); transition: width .55s var(--smooth); }
 .pct { font: 700 14px/1 var(--display); color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
 
-/* капча */
-.captcha { position: relative; display: flex; align-items: center; gap: 14px; height: 78px; padding: 0 16px; border-radius: 14px; background: #f9f9fb; color: #1d1d1f; box-shadow: 0 6px 20px rgba(0, 0, 0, .25); }
+.captcha { position: relative; display: flex; align-items: center; gap: 14px; height: 78px; padding: 0 16px; border-radius: 14px; background: #f9f9fb; color: #1d1d1f; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
 .cbox { position: relative; z-index: 2; flex: none; width: 34px; height: 34px; padding: 0; border-radius: 7px; border: 2px solid #c1c1c8; background: #fff; cursor: pointer; transition: transform .5s var(--spring), border-color .2s; touch-action: manipulation; }
 .cbox:hover { border-color: #8e8e98; }
 .cbox:focus-visible { outline: 3px solid #4f8cff; outline-offset: 2px; }
@@ -149,12 +113,27 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
 .cbrand { display: grid; justify-items: center; gap: 2px; font: 700 9px/1.15 var(--sans); color: #8e8e98; text-align: center; }
 .cbrand .logo { font-size: 22px; line-height: 1; }
 
-/* сканер */
+/* фото-капча (сетка) */
+.gcap { background: #f4f5f9; color: #1d1d1f; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.28); }
+.gcap .top { background: linear-gradient(135deg,#3b6ff5,#4f8cff); color: #fff; padding: 12px 14px; }
+.gcap .top small { opacity: .9; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.gcap .top b { display: block; font: 700 16px/1.25 var(--sans); }
+.grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; padding: 8px; }
+.tile { position: relative; aspect-ratio: 1; border: 0; padding: 0; cursor: pointer; border-radius: 8px; overflow: hidden; display: grid; place-items: center; font-size: clamp(26px,9vw,40px); color: #fff; touch-action: manipulation; }
+.tile span { filter: drop-shadow(0 3px 6px rgba(0,0,0,.3)); pointer-events: none; }
+.tile em { position: absolute; left: 5px; bottom: 4px; font: 800 10px/1 var(--sans); font-style: normal; background: rgba(0,0,0,.35); color: #fff; padding: 3px 5px; border-radius: 5px; }
+.tile::after { content: ""; position: absolute; inset: 0; border: 4px solid transparent; border-radius: 8px; transition: border-color .15s; }
+.tile[aria-pressed="true"]::after { border-color: #fff; }
+.tile[aria-pressed="true"] .chk { position: absolute; right: 5px; top: 5px; width: 22px; height: 22px; border-radius: 50%; background: #4f8cff; display: grid; place-items: center; color: #fff; font-size: 13px; animation: pop .3s var(--spring); }
+.gcap .btm { display: flex; justify-content: flex-end; padding: 0 12px 12px; }
+.gcap .verify { appearance: none; border: 0; cursor: pointer; font: 800 14px/1 var(--sans); color: #fff; background: #4f8cff; padding: 12px 20px; border-radius: 10px; }
+.gcap .verify:disabled { opacity: .5; cursor: default; }
+
 .scanner { position: relative; width: 150px; height: 150px; justify-self: center; }
-.scanner .avatar { position: absolute; inset: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 44px/1 var(--display); background: radial-gradient(circle at 30% 25%, #ff9ccf, #8b5cf6 72%); box-shadow: 0 0 44px rgba(255, 79, 163, .45); }
-.scanner .ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .16); }
-.scanner .ring.r2 { inset: 9px; border-style: dashed; border-color: rgba(255, 255, 255, .3); animation: spin 9s linear infinite; }
-.scanner .sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0deg, rgba(43, 213, 118, .42) 48deg, transparent 50deg); animation: spin 1.6s linear infinite; }
+.scanner .avatar { position: absolute; inset: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 44px/1 var(--display); background: radial-gradient(circle at 30% 25%,#ff9ccf,#8b5cf6 72%); box-shadow: 0 0 44px rgba(255,79,163,.45); }
+.scanner .ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,.16); }
+.scanner .ring.r2 { inset: 9px; border-style: dashed; border-color: rgba(255,255,255,.3); animation: spin 9s linear infinite; }
+.scanner .sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0deg, rgba(43,213,118,.42) 48deg, transparent 50deg); animation: spin 1.6s linear infinite; }
 .scanner .beam { position: absolute; left: 14px; right: 14px; top: 22px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, var(--green), transparent); box-shadow: 0 0 16px var(--green); animation: beam 1.7s ease-in-out infinite alternate; }
 @keyframes beam { to { top: 125px; } }
 .scanner.done .sweep, .scanner.done .beam { display: none; }
@@ -162,55 +141,74 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
 .meters li { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; align-items: center; }
 .meters span { color: var(--ink-2); font-weight: 700; font-size: 14.5px; }
 .meters b { font: 700 14.5px/1 var(--display); font-variant-numeric: tabular-nums; }
-.meters .track { grid-column: 1 / -1; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .1); overflow: hidden; }
-.meters .track em { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #22c55e, #8ff5bd); transition: width .9s var(--smooth); }
-.meters li.over .track em { background: linear-gradient(90deg, var(--orange), var(--red)); }
-.meters li.broken .track { animation: shake .5s 2; box-shadow: 0 0 18px rgba(255, 77, 94, .75); }
+.meters .track { grid-column: 1 / -1; height: 8px; border-radius: 99px; background: rgba(255,255,255,.1); overflow: hidden; }
+.meters .track em { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg,#22c55e,#8ff5bd); transition: width .9s var(--smooth); }
+.meters li.over .track em { background: linear-gradient(90deg,var(--orange),var(--red)); }
+.meters li.broken .track { animation: shake .5s 2; box-shadow: 0 0 18px rgba(255,77,94,.75); }
 .meters li.broken b { color: #ff9aa4; }
-.err { padding: 12px 14px; border-radius: 12px; background: rgba(255, 77, 94, .12); border: 1px solid rgba(255, 77, 94, .35); color: #ffc7cc; font-weight: 800; text-align: center; }
+.err { padding: 12px 14px; border-radius: 12px; background: rgba(255,77,94,.12); border: 1px solid rgba(255,77,94,.35); color: #ffc7cc; font-weight: 800; text-align: center; }
 .glitch { animation: glitch .9s steps(2) 2; }
-@keyframes glitch {
-  0% { transform: translate(0); text-shadow: 2px 0 #ff4fa3, -2px 0 #2bd5ff; }
-  25% { transform: translate(-3px, 1px); }
-  50% { transform: translate(3px, -1px); text-shadow: -2px 0 #ff4fa3, 2px 0 #2bd5ff; }
-  75% { transform: translate(-1px, -1px); }
-  100% { transform: translate(0); text-shadow: none; }
-}
+@keyframes glitch { 0% { transform: translate(0); text-shadow: 2px 0 #ff4fa3,-2px 0 #2bd5ff; } 25% { transform: translate(-3px,1px); } 50% { transform: translate(3px,-1px); text-shadow: -2px 0 #ff4fa3,2px 0 #2bd5ff; } 75% { transform: translate(-1px,-1px); } 100% { transform: translate(0); text-shadow: none; } }
 
-/* вопрос */
-.q { font: 700 clamp(19px, 5.3vw, 22px)/1.32 var(--display); text-wrap: balance; }
+/* викторина */
+.q { font: 700 clamp(19px,5.3vw,22px)/1.32 var(--display); text-wrap: balance; }
+.opts { display: grid; gap: 10px; }
+.opt { text-align: left; background: rgba(255,255,255,.07); border: 1px solid var(--glass-brd); color: #fff; font: 700 15.5px/1.3 var(--sans); padding: 15px 16px; border-radius: 14px; cursor: pointer; transition: transform .25s var(--spring), background .2s, border-color .2s; }
+.opt:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); transform: translateY(-1px); }
+.opt.picked { background: linear-gradient(135deg, rgba(255,79,163,.3), rgba(139,92,246,.3)); border-color: var(--pink); }
+.qcount { font: 700 11.5px/1 var(--sans); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+/* вопрос с убегающей кнопкой */
 .answers { display: flex; gap: 12px; justify-content: center; align-items: center; min-height: 128px; }
-.btn.yes { min-width: 124px; background: linear-gradient(135deg, #2bd576, #16a34a); box-shadow: 0 12px 30px rgba(43, 213, 118, .35), inset 0 1px 0 rgba(255, 255, 255, .3); transition: transform .4s var(--spring), box-shadow .3s; }
+.btn.yes { min-width: 124px; background: linear-gradient(135deg,#2bd576,#16a34a); box-shadow: 0 12px 30px rgba(43,213,118,.35), inset 0 1px 0 rgba(255,255,255,.3); transition: transform .4s var(--spring), box-shadow .3s; }
 .btn.yes.pulse { animation: pulse 1.2s ease-in-out infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(43, 213, 118, .12), 0 16px 40px rgba(43, 213, 118, .5); } }
-.btn.no { min-width: 112px; background: rgba(255, 255, 255, .1); border: 1px solid var(--glass-brd); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(43,213,118,.12), 0 16px 40px rgba(43,213,118,.5); } }
+.btn.no { min-width: 112px; background: rgba(255,255,255,.1); border: 1px solid var(--glass-brd); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .btn.no.flying { position: fixed; z-index: 30; margin: 0; white-space: nowrap; transition: left .45s var(--spring), top .45s var(--spring), transform .35s var(--spring), opacity .3s; }
 .btn.no.poof { transform: scale(0) rotate(-25deg); opacity: 0; }
 .placeholder { display: inline-block; }
 
-/* финал */
 .big { justify-self: center; font-size: 64px; line-height: 1; animation: bounce 1.1s var(--spring) infinite alternate; }
 @keyframes bounce { from { transform: translateY(0) rotate(-7deg); } to { transform: translateY(-12px) rotate(7deg); } }
-.prank { text-align: center; font-size: clamp(32px, 10vw, 44px); }
+.prank { text-align: center; font-size: clamp(32px,10vw,44px); }
 .prank .ch { display: inline-block; animation: drop .75s var(--spring) both; }
 @keyframes drop { from { transform: translateY(-70px) scale(.3) rotate(-30deg); opacity: 0; } }
-.cert { position: relative; padding: 20px 18px 18px; border-radius: 18px; background: linear-gradient(160deg, #fffaf0, #fff0f7); color: #2a1a33; box-shadow: 0 14px 40px rgba(0, 0, 0, .35); overflow: hidden; }
-.cert::before { content: ""; position: absolute; inset: 8px; border: 1.5px dashed rgba(139, 92, 246, .38); border-radius: 12px; pointer-events: none; }
+.compliment { position: relative; text-align: center; padding: 16px; border-radius: 16px; background: rgba(255,255,255,.06); border: 1px solid var(--glass-brd); font: 700 17px/1.4 var(--sans); min-height: 72px; display: grid; place-items: center; }
+.compliment.swap { animation: pop .4s var(--spring); }
+.cert { position: relative; padding: 20px 18px 18px; border-radius: 18px; background: linear-gradient(160deg,#fffaf0,#fff0f7); color: #2a1a33; box-shadow: 0 14px 40px rgba(0,0,0,.35); overflow: hidden; }
+.cert::before { content: ""; position: absolute; inset: 8px; border: 1.5px dashed rgba(139,92,246,.38); border-radius: 12px; pointer-events: none; }
 .cert h3 { margin: 0 0 8px; font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--violet); }
 .cert p { margin: 0; font-size: 15px; line-height: 1.45; padding-right: 8px; }
 .cert .who { color: #d6246e; font-weight: 800; }
 .cert .foot { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; font-size: 12px; color: #7a6a86; }
 .stamp { position: absolute; right: 12px; bottom: 34px; padding: 6px 10px; border: 3px solid #e11d48; border-radius: 10px; color: #e11d48; font: 800 15px/1 var(--display); letter-spacing: .06em; transform: rotate(-14deg); opacity: 0; mix-blend-mode: multiply; pointer-events: none; }
-.stamp.slam { animation: slam .45s cubic-bezier(.2, 1.4, .4, 1) forwards; }
+.stamp.slam { animation: slam .45s cubic-bezier(.2,1.4,.4,1) forwards; }
 @keyframes slam { 0% { opacity: 0; transform: rotate(-14deg) scale(3.2); } 60% { opacity: 1; transform: rotate(-14deg) scale(.9); } 100% { opacity: .92; transform: rotate(-14deg) scale(1); } }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .row .btn { padding: 15px 10px; font-size: 14.5px; }
 
-/* звук и тост */
-.sound { position: fixed; z-index: 50; top: max(12px, env(safe-area-inset-top)); right: 12px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--glass-brd); background: rgba(255, 255, 255, .08); color: #fff; font-size: 18px; cursor: pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+/* фотобудка (по желанию, всё на устройстве) */
+.booth { position: fixed; inset: 0; z-index: 70; display: none; place-items: center; padding: 20px 16px; background: rgba(8,4,18,.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.booth.open { display: grid; animation: enter .4s var(--smooth) both; }
+.booth .inner { width: min(420px,100%); display: grid; gap: 14px; text-align: center; }
+.frame { position: relative; aspect-ratio: 3/4; border-radius: 22px; overflow: hidden; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,.5); border: 3px solid transparent; background-image: linear-gradient(#000,#000), linear-gradient(135deg,var(--pink),var(--violet),var(--orange)); background-origin: border-box; background-clip: padding-box, border-box; }
+.frame video, .frame canvas, .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.frame video, .frame .mirror { transform: scaleX(-1); }
+.frame .crown { position: absolute; left: 0; right: 0; top: 12px; text-align: center; font-size: 34px; filter: drop-shadow(0 3px 8px rgba(0,0,0,.5)); pointer-events: none; }
+.frame .cap { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font: 800 19px/1 var(--display); color: #fff; text-shadow: 0 3px 12px rgba(0,0,0,.6); pointer-events: none; }
+.frame .cap small { display: block; font: 700 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: 5px; }
+.count { position: absolute; inset: 0; display: grid; place-items: center; font: 800 90px/1 var(--display); color: #fff; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
+.count.go { animation: cnt 1s var(--spring); }
+@keyframes cnt { from { transform: scale(2.4); opacity: 0; } 40% { opacity: 1; } to { transform: scale(1); opacity: .0; } }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.flash.go { animation: fl .5s ease-out; }
+@keyframes fl { from { opacity: .95; } to { opacity: 0; } }
+.booth .note { font-size: 12.5px; color: var(--muted); }
+
+.sound { position: fixed; z-index: 50; top: max(12px, env(safe-area-inset-top)); right: 12px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--glass-brd); background: rgba(255,255,255,.08); color: #fff; font-size: 18px; cursor: pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .sound:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
-.toast { position: fixed; z-index: 60; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translate(-50%, 20px); opacity: 0; padding: 12px 18px; border-radius: 14px; background: rgba(20, 12, 36, .94); border: 1px solid var(--glass-brd); font-weight: 800; white-space: nowrap; pointer-events: none; transition: transform .35s var(--spring), opacity .3s; }
-.toast.show { transform: translate(-50%, 0); opacity: 1; }
+.toast { position: fixed; z-index: 80; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translate(-50%,20px); opacity: 0; padding: 12px 18px; border-radius: 14px; background: rgba(20,12,36,.94); border: 1px solid var(--glass-brd); font-weight: 800; white-space: nowrap; pointer-events: none; transition: transform .35s var(--spring), opacity .3s; max-width: 92vw; }
+.toast.show { transform: translate(-50%,0); opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -226,25 +224,22 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
 
 <main>
   <div class="card" id="card">
-    <!-- 0. Крючок -->
     <section class="stage active" id="s0">
       <span class="pill"><span class="dot"></span>Срочно</span>
       <h1 class="title"><span class="nm" data-name>Айжан</span>, нужно твоё подтверждение</h1>
-      <p class="text">Это займёт 30 секунд. Пожалуйста, пройди до конца и не закрывай страницу.</p>
-      <button class="btn primary shine" id="start" type="button">Продолжить <span class="arrow">→</span></button>
+      <p class="text type" id="hookType"></p>
+      <button class="btn primary shine wide" id="start" type="button">Продолжить <span class="arrow">→</span></button>
       <p class="fine">Нажимая «Продолжить», ты подтверждаешь, что ты замечательная ✨</p>
     </section>
 
-    <!-- Загрузка -->
     <section class="stage" id="sL">
       <h2 class="title sm">Подключаемся к защищённому серверу…</h2>
       <div class="bar"><i id="lbar"></i></div>
       <div class="stephead"><span class="fine" id="ltext">Шифруем соединение</span><span class="pct" id="lpct">0%</span></div>
     </section>
 
-    <!-- 1. Капча -->
     <section class="stage" id="s1">
-      <div class="stephead"><div class="steps" data-step="1"></div><span class="steplabel">Шаг 1 из 3</span></div>
+      <div class="stephead"><div class="steps" data-step="1" data-total="5"></div><span class="steplabel">Шаг 1 из 5</span></div>
       <h2 class="title sm">Проверка безопасности</h2>
       <p class="text">Подтверди, что ты не робот.</p>
       <div class="captcha">
@@ -255,9 +250,19 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
       <p class="hint" id="chint" aria-live="polite"></p>
     </section>
 
-    <!-- 2. Сканирование -->
+    <section class="stage" id="s1b">
+      <div class="stephead"><div class="steps" data-step="2" data-total="5"></div><span class="steplabel">Шаг 2 из 5</span></div>
+      <h2 class="title sm">Ещё одна проверка</h2>
+      <div class="gcap">
+        <div class="top"><small>Выберите все квадраты</small><b>где вы красивая</b></div>
+        <div class="grid" id="grid"></div>
+        <div class="btm"><button class="verify" id="gverify" type="button" disabled>Проверить</button></div>
+      </div>
+      <p class="hint" id="ghint" aria-live="polite"></p>
+    </section>
+
     <section class="stage" id="s2">
-      <div class="stephead"><div class="steps" data-step="2"></div><span class="steplabel">Шаг 2 из 3</span></div>
+      <div class="stephead"><div class="steps" data-step="3" data-total="5"></div><span class="steplabel">Шаг 3 из 5</span></div>
       <h2 class="title sm" id="scanTitle">Сканирование личности…</h2>
       <div class="scanner" id="scanner" aria-hidden="true">
         <div class="ring"></div><div class="ring r2"></div><div class="avatar" id="initial">А</div><div class="sweep"></div><div class="beam"></div>
@@ -266,15 +271,23 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
         <li><span>Доброта</span><b>0%</b><div class="track"><em></em></div></li>
         <li><span>Обаяние</span><b>0%</b><div class="track"><em></em></div></li>
         <li><span>Ум</span><b>0%</b><div class="track"><em></em></div></li>
+        <li><span>Чувство юмора</span><b>0%</b><div class="track"><em></em></div></li>
         <li class="over"><span>Уровень крутости</span><b>0%</b><div class="track"><em></em></div></li>
       </ul>
       <p class="err" id="scanErr" hidden>⚠️ Ошибка: шкала не рассчитана на <span data-name>Айжан</span></p>
-      <button class="btn primary" id="toQ" type="button" hidden>Понятно, дальше <span class="arrow">→</span></button>
+      <button class="btn primary wide" id="toQ" type="button" hidden>Понятно, дальше <span class="arrow">→</span></button>
     </section>
 
-    <!-- 3. Вопрос -->
+    <section class="stage" id="sQ">
+      <div class="stephead"><div class="steps" data-step="4" data-total="5"></div><span class="qcount" id="qcount"></span></div>
+      <h2 class="title sm">Небольшой опрос</h2>
+      <p class="q" id="qtext"></p>
+      <div class="opts" id="qopts"></div>
+      <p class="hint" id="quizHint" aria-live="polite"></p>
+    </section>
+
     <section class="stage" id="s3">
-      <div class="stephead"><div class="steps" data-step="3"></div><span class="steplabel">Шаг 3 из 3</span></div>
+      <div class="stephead"><div class="steps" data-step="5" data-total="5"></div><span class="steplabel">Шаг 5 из 5</span></div>
       <h2 class="title sm">Последний вопрос</h2>
       <p class="q"><span class="nm" data-name>Айжан</span>, ты признаёшь, что ты самая классная? 😌</p>
       <div class="answers" id="answers">
@@ -284,25 +297,50 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
       <p class="hint" id="qhint" aria-live="polite"></p>
     </section>
 
-    <!-- 4. Финал -->
     <section class="stage" id="s4">
       <div class="big" aria-hidden="true">🎉</div>
       <h1 class="title prank" id="prank" data-text="Это пранк!">Это пранк!</h1>
       <span class="pill good">Ура! Проверка пройдена</span>
       <p class="text center">Попалась! 😄 Никакого срочного подтверждения не было — просто хотелось, чтобы ты улыбнулась. Хорошего дня, <span data-name>Айжан</span>! 💐</p>
+      <div class="compliment" id="compliment" aria-live="polite">Ты — лучшее, что случилось с этим экраном сегодня.</div>
+      <button class="btn ghost wide" id="moreComp" type="button">Ещё комплимент 💛</button>
       <div class="cert" id="cert">
         <h3>Сертификат № 001</h3>
         <p>Настоящим подтверждается, что <span class="who" data-name>Айжан</span> — официально самая классная. Проверено сканером. Возражения не принимаются: кнопка «Нет» уволилась.</p>
         <div class="foot"><span id="certDate">Выдан сегодня</span><span>Действует всегда</span></div>
         <div class="stamp" id="stamp">ОДОБРЕНО</div>
       </div>
+      <button class="btn primary wide" id="selfie" type="button">📸 Селфи с сертификатом</button>
       <div class="row">
         <button class="btn ghost" id="again" type="button">Ещё раз ↺</button>
-        <button class="btn primary" id="save" type="button">Сохранить 📜</button>
+        <button class="btn ghost" id="save" type="button">Сохранить 📜</button>
       </div>
+      <p class="fine">Селфи и сертификат остаются у тебя на устройстве. Захочешь — сама поделишься.</p>
     </section>
   </div>
 </main>
+
+<!-- фотобудка -->
+<div class="booth" id="booth" role="dialog" aria-modal="true" aria-label="Селфи с сертификатом">
+  <div class="inner">
+    <div class="frame" id="frame">
+      <video id="cam" playsinline autoplay muted></video>
+      <div class="crown">👑</div>
+      <div class="cap" id="camCap">самая классная<small data-name>Айжан</small></div>
+      <div class="count" id="count" hidden></div>
+      <div class="flash" id="flash"></div>
+    </div>
+    <p class="hint" id="boothHint">Наведи камеру на себя 💖</p>
+    <button class="btn primary wide" id="snap" type="button">Снять 📸</button>
+    <div class="row" id="shotRow" hidden>
+      <button class="btn ghost" id="retake" type="button">Ещё раз ↺</button>
+      <button class="btn primary" id="shareShot" type="button">Сохранить 📤</button>
+    </div>
+    <button class="btn ghost wide" id="closeBooth" type="button">Закрыть</button>
+    <p class="note">Фото не отправляется автоматически — остаётся только у тебя.</p>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <noscript><p style="position:fixed;left:0;right:0;bottom:0;margin:0;padding:14px;text-align:center;background:#000">Включи JavaScript — тут кое-что важное 🙂</p></noscript>
 
@@ -311,7 +349,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   "use strict";
   const $ = s => document.querySelector(s);
   const qs = new URLSearchParams(location.search);
-  const NAME = ((qs.get("name") || "").trim().slice(0, 30)) || "Айжан";      // ?name=Имя — для другого человека
+  const NAME = ((qs.get("name") || "").trim().slice(0, 30)) || "Айжан";
   document.querySelectorAll("[data-name]").forEach(e => (e.textContent = NAME));
   $("#initial").textContent = NAME[0].toUpperCase();
   let pageTitle = `${NAME}, это важно ❗`;
@@ -322,88 +360,86 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   const card = $("#card");
   const shake = el => { el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); setTimeout(() => el.classList.remove("shake"), 600); };
   const hint = (el, text) => { el.textContent = text; el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); };
-  let tt;
-  const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 2200); };
+  let tt; const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 2400); };
 
-  /* ---------- звук: Web Audio, без файлов ---------- */
-  let ac = null, muted = false;
-  try { muted = localStorage.getItem("prank-muted") === "1"; } catch (e) {}
+  /* ---------- звук: Web Audio + мастер-громкость, разблокировка на первом жесте ---------- */
+  let ac = null, master = null, announced = false;
+  let muted = false; try { muted = localStorage.getItem("prank-muted") === "1"; } catch (e) {}
   const soundBtn = $("#sound");
   const paintSound = () => { soundBtn.textContent = muted ? "🔇" : "🔊"; soundBtn.setAttribute("aria-label", muted ? "Включить звук" : "Выключить звук"); };
   paintSound();
-  function unlock() {
+  function ensureAudio() {
     try {
-      if (!ac) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) ac = new AC(); }
-      if (ac && ac.state === "suspended") ac.resume();
+      if (!ac) {
+        const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+        ac = new AC(); master = ac.createGain(); master.gain.value = muted ? 0 : .9; master.connect(ac.destination);
+      }
+      if (ac.state !== "running") ac.resume();
     } catch (e) {}
+    return ac;
   }
-  function tone(freq, dur = .12, type = "sine", vol = .08, when = 0, slideTo = 0) {
-    if (muted || !ac) return;
+  function prime() {                                   // «разбудить» звук в рамках жеста (нужно для iOS/Chrome)
+    ensureAudio();
+    if (!ac) return;
+    try { const b = ac.createBuffer(1, 1, 22050), src = ac.createBufferSource(); src.buffer = b; src.connect(master); src.start(0); } catch (e) {}
+    if (ac.state === "running" && !muted && !announced) { announced = true; toast("🔊 Звук включён"); }
+  }
+  ["pointerdown", "touchstart", "keydown", "click"].forEach(ev => addEventListener(ev, prime, { passive: true }));
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) ensureAudio(); });
+  function tone(freq, dur = .12, type = "sine", vol = .12, when = 0, slideTo = 0) {
+    if (muted) return; ensureAudio(); if (!ac || !master) return;
     try {
       const t = ac.currentTime + when, o = ac.createOscillator(), g = ac.createGain();
       o.type = type; o.frequency.setValueAtTime(freq, t);
       if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
-      g.gain.setValueAtTime(.0001, t);
-      g.gain.exponentialRampToValueAtTime(vol, t + .012);
-      g.gain.exponentialRampToValueAtTime(.0001, t + dur);
-      o.connect(g); g.connect(ac.destination);
-      o.start(t); o.stop(t + dur + .03);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .03);
     } catch (e) {}
   }
   const sfx = {
-    click: () => tone(540, .07, "triangle", .06),
-    boing: () => tone(250, .24, "triangle", .1, 0, 880),
-    tick: () => tone(1250, .035, "square", .02),
-    ok: () => { tone(660, .1, "sine", .09); tone(990, .18, "sine", .09, .09); },
-    error: () => { tone(130, .38, "sawtooth", .06); tone(138, .38, "sawtooth", .05); },
-    thud: () => { tone(150, .2, "sine", .22, 0, 55); tone(90, .12, "square", .04); },
-    fanfare: () => { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, .2, "triangle", .09, i * .11)); tone(1046.5, .7, "triangle", .08, .55); tone(1318.5, .7, "sine", .05, .55); },
+    click: () => tone(560, .09, "triangle", .12),
+    boing: () => tone(240, .26, "triangle", .16, 0, 900),
+    tick: () => tone(1250, .05, "square", .05),
+    pick: () => { tone(720, .08, "triangle", .1); tone(1080, .1, "sine", .08, .06); },
+    ok: () => { tone(660, .12, "sine", .13); tone(990, .2, "sine", .12, .1); },
+    error: () => { tone(130, .4, "sawtooth", .1); tone(138, .4, "sawtooth", .08); },
+    thud: () => { tone(150, .22, "sine", .3, 0, 55); tone(90, .14, "square", .06); },
+    shutter: () => { tone(1800, .03, "square", .12); tone(500, .06, "sine", .1, .03); },
+    fanfare: () => { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, .22, "triangle", .13, i * .11)); tone(1046.5, .75, "triangle", .1, .55); tone(1318.5, .75, "sine", .07, .55); },
   };
   soundBtn.addEventListener("click", () => {
-    muted = !muted;
-    try { localStorage.setItem("prank-muted", muted ? "1" : "0"); } catch (e) {}
-    paintSound();
-    if (!muted) { unlock(); sfx.ok(); }
+    muted = !muted; try { localStorage.setItem("prank-muted", muted ? "1" : "0"); } catch (e) {}
+    paintSound(); ensureAudio(); if (master) master.gain.value = muted ? 0 : .9;
+    if (!muted) sfx.ok();
   });
 
-  /* ---------- фон: всплывающие искры ---------- */
-  const SPARK = ["✨", "💖", "🌸", "⭐", "💫", "🌷"];
-  const sparkles = $("#sparkles");
+  /* ---------- искры ---------- */
+  const SPARK = ["✨", "💖", "🌸", "⭐", "💫", "🌷"], sparkles = $("#sparkles");
   if (!reduce) setInterval(() => {
     if (document.hidden) return;
     const s = document.createElement("span");
     s.textContent = SPARK[Math.random() * SPARK.length | 0];
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.fontSize = 12 + Math.random() * 16 + "px";
-    s.style.animationDuration = 9 + Math.random() * 8 + "s";
-    s.addEventListener("animationend", () => s.remove());
-    sparkles.append(s);
+    s.style.left = Math.random() * 100 + "vw"; s.style.fontSize = 12 + Math.random() * 16 + "px"; s.style.animationDuration = 9 + Math.random() * 8 + "s";
+    s.addEventListener("animationend", () => s.remove()); sparkles.append(s);
   }, 900);
 
-  /* ---------- конфетти (canvas) ---------- */
+  /* ---------- конфетти ---------- */
   const cv = $("#confetti"), cx = cv.getContext("2d");
   const COLORS = ["#ff4fa3", "#8b5cf6", "#ffb020", "#2bd576", "#4fc3ff", "#ffffff", "#ff4d5e"];
   let parts = [], raf = 0;
   function sizeCanvas() { const d = Math.min(2, window.devicePixelRatio || 1); cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
   sizeCanvas();
   function burst(x, y, n, spread, angle, power) {
-    for (let i = 0; i < n; i++) {
-      const a = angle + (Math.random() - .5) * spread, v = power * (.45 + Math.random() * .75);
-      parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, g: .26 + Math.random() * .12, w: 6 + Math.random() * 7, h: 8 + Math.random() * 10,
-        r: Math.random() * 6.28, vr: (Math.random() - .5) * .35, c: COLORS[Math.random() * COLORS.length | 0], life: 0, max: 150 + Math.random() * 90, round: Math.random() < .3 });
-    }
+    for (let i = 0; i < n; i++) { const a = angle + (Math.random() - .5) * spread, v = power * (.45 + Math.random() * .75);
+      parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, g: .26 + Math.random() * .12, w: 6 + Math.random() * 7, h: 8 + Math.random() * 10, r: Math.random() * 6.28, vr: (Math.random() - .5) * .35, c: COLORS[Math.random() * COLORS.length | 0], life: 0, max: 150 + Math.random() * 90, round: Math.random() < .3 }); }
     if (!raf) raf = requestAnimationFrame(frame);
   }
   function frame() {
     cx.clearRect(0, 0, innerWidth, innerHeight);
     parts = parts.filter(p => p.life < p.max && p.y < innerHeight + 40);
-    for (const p of parts) {
-      p.life++; p.vx *= .985; p.vy = p.vy * .985 + p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+    for (const p of parts) { p.life++; p.vx *= .985; p.vy = p.vy * .985 + p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr;
       cx.save(); cx.globalAlpha = Math.min(1, (p.max - p.life) / 40); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c;
-      if (p.round) { cx.beginPath(); cx.arc(0, 0, p.w / 2, 0, 6.283); cx.fill(); }
-      else { cx.scale(1, Math.cos(p.life * .15 + p.r)); cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
-      cx.restore();
-    }
+      if (p.round) { cx.beginPath(); cx.arc(0, 0, p.w / 2, 0, 6.283); cx.fill(); } else { cx.scale(1, Math.cos(p.life * .15 + p.r)); cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); } cx.restore(); }
     raf = parts.length ? requestAnimationFrame(frame) : 0;
   }
   function celebrate() {
@@ -413,218 +449,216 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
     setTimeout(() => burst(W / 2, -10, 90 * k, Math.PI / 2, Math.PI / 2, 6), 750);
     if (reduce) return;
     const EMO = ["🎉", "💐", "👑", "💖", "🥳", "🌸"];
-    for (let i = 0; i < 26; i++) setTimeout(() => {
-      const s = document.createElement("span");
-      s.className = "fall"; s.textContent = EMO[i % EMO.length];
-      s.style.left = Math.random() * 96 + "vw"; s.style.fontSize = 20 + Math.random() * 18 + "px";
-      s.style.animationDuration = 2.6 + Math.random() * 2.4 + "s";
-      s.addEventListener("animationend", () => s.remove());
-      document.body.append(s);
-    }, i * 110);
+    for (let i = 0; i < 26; i++) setTimeout(() => { const s = document.createElement("span"); s.className = "fall"; s.textContent = EMO[i % EMO.length]; s.style.left = Math.random() * 96 + "vw"; s.style.fontSize = 20 + Math.random() * 18 + "px"; s.style.animationDuration = 2.6 + Math.random() * 2.4 + "s"; s.addEventListener("animationend", () => s.remove()); document.body.append(s); }, i * 110);
   }
 
-  /* ---------- смена экранов ---------- */
+  /* ---------- шаги ---------- */
   document.querySelectorAll(".steps").forEach(el => {
-    const n = +el.dataset.step;
-    for (let i = 1; i <= 3; i++) { const d = document.createElement("i"); d.className = i < n ? "done" : i === n ? "on" : ""; el.append(d); }
+    const n = +el.dataset.step, total = +el.dataset.total || 3;
+    for (let i = 1; i <= total; i++) { const d = document.createElement("i"); d.className = i < n ? "done" : i === n ? "on" : ""; el.append(d); }
   });
   let current = $("#s0");
   async function go(id) {
-    const next = $(id);
-    if (!next || next === current) return;
+    const next = $(id); if (!next || next === current) return;
+    ensureAudio();
     current.classList.remove("active"); current.classList.add("leaving");
-    await wait(330);
-    current.classList.remove("leaving");
-    next.classList.add("active");
-    current = next;
-    const h = next.querySelector("h1, h2");
-    if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+    await wait(320); current.classList.remove("leaving");
+    next.classList.add("active"); current = next;
+    const h = next.querySelector("h1, h2"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   }
   document.addEventListener("visibilitychange", () => { document.title = document.hidden ? `${NAME}, вернись 🥺` : pageTitle; });
 
+  /* ---------- 0: печатающийся подзаголовок ---------- */
+  async function typeOut(el, text) {
+    el.textContent = ""; el.classList.remove("done"); el.classList.add("type");
+    if (reduce) { el.textContent = text; el.classList.add("done"); return; }
+    for (let i = 0; i < text.length; i++) { el.textContent += text[i]; if (text[i] !== " ") sfx.tick(); await wait(26); }
+    el.classList.add("done");
+  }
+  typeOut($("#hookType"), "Это займёт минуту. Пожалуйста, пройди до конца и не закрывай страницу.");
+
   /* ---------- 0 → загрузка → капча ---------- */
   $("#start").addEventListener("click", async () => {
-    unlock(); sfx.click();
-    await go("#sL");
+    prime(); sfx.click(); await go("#sL");
     const bar = $("#lbar"), txt = $("#ltext"), pct = $("#lpct");
-    const steps = [["Шифруем соединение", 34], ["Проверяем устройство", 67], ["Почти готово…", 99]];
-    for (const [t, p] of steps) { txt.textContent = t; bar.style.width = p + "%"; pct.textContent = p + "%"; sfx.tick(); await wait(650); }
-    txt.textContent = "Ещё чуть-чуть… 🙃";
-    await wait(900);                                   // классика: зависли на 99%
-    bar.style.width = "100%"; pct.textContent = "100%"; txt.textContent = "Готово";
-    await wait(350);
-    go("#s1");
+    const steps = [["Шифруем соединение", 28], ["Проверяем устройство", 55], ["Ищем твою анкету", 81], ["Почти готово…", 99]];
+    for (const [t, p] of steps) { txt.textContent = t; bar.style.width = p + "%"; pct.textContent = p + "%"; sfx.tick(); await wait(620); }
+    txt.textContent = "Ещё чуть-чуть… 🙃"; await wait(950);
+    bar.style.width = "100%"; pct.textContent = "100%"; txt.textContent = "Готово"; await wait(340); go("#s1");
   });
 
-  /* ---------- 1. капча, которая убегает ---------- */
+  /* ---------- 1: капча-галочка ---------- */
   const cbox = $("#cbox"), chint = $("#chint");
   const C_MSG = ["Хм… слишком быстро для человека 🤔", "Так бы сделал робот 🤖", "Ладно-ладно, последняя попытка 😅"];
   const C_POS = [[150, -8, 8], [66, 10, -8], [205, -4, 6]];
   let cDodges = 0, cDone = false, cLast = 0;
   function captchaDodge(e) {
-    if (cDone || cDodges >= 3) return false;
-    if (e && e.cancelable) e.preventDefault();
-    const [x, y, r] = C_POS[cDodges];
-    const room = cbox.parentElement.clientWidth - 80;            // на узком экране — ближе
+    if (cDone || cDodges >= 3) return false; if (e && e.cancelable) e.preventDefault();
+    const [x, y, r] = C_POS[cDodges], room = cbox.parentElement.clientWidth - 80;
     cbox.style.transform = `translate(${Math.min(x, room)}px, ${y}px) rotate(${r}deg)`;
-    hint(chint, C_MSG[cDodges]);
-    cDodges++; cLast = performance.now();
-    sfx.boing(); vibrate(25);
-    return true;
+    hint(chint, C_MSG[cDodges]); cDodges++; cLast = performance.now(); sfx.boing(); vibrate(25); return true;
   }
   cbox.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") captchaDodge(e); });
   cbox.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") captchaDodge(e); });
   cbox.addEventListener("click", async e => {
-    if (cDone) return;
-    if (performance.now() - cLast < 450) return;                // этот клик — тот же тап, после которого она убежала
-    if (captchaDodge(e)) return;                                 // с клавиатуры — тоже три попытки
-    cDone = true; sfx.click();
-    cbox.classList.add("spin"); cbox.setAttribute("aria-checked", "mixed");
-    hint(chint, "Проверяем…");
-    await wait(1300);
-    cbox.classList.remove("spin"); cbox.classList.add("ok"); cbox.setAttribute("aria-checked", "true");
-    sfx.ok(); vibrate(30);
-    hint(chint, "Ты человек. Причём очень хороший 💚");
-    await wait(1500);
-    await go("#s2");
-    runScan();
+    if (cDone) return; if (performance.now() - cLast < 450) return; if (captchaDodge(e)) return;
+    cDone = true; sfx.click(); cbox.classList.add("spin"); cbox.setAttribute("aria-checked", "mixed"); hint(chint, "Проверяем…");
+    await wait(1300); cbox.classList.remove("spin"); cbox.classList.add("ok"); cbox.setAttribute("aria-checked", "true"); sfx.ok(); vibrate(30);
+    hint(chint, "Ты человек. Причём очень хороший 💚"); await wait(1400); go("#s1b");
   });
 
-  /* ---------- 2. сканирование ---------- */
+  /* ---------- 2: фото-капча (все квадраты — «ты») ---------- */
+  const FACES = ["🧕", "💃", "👑", "🌟", "💖", "😍", "🌸", "✨", "🦋"];
+  const grid = $("#grid"), gverify = $("#gverify"), ghint = $("#ghint");
+  const picked = new Set();
+  FACES.forEach((f, i) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "tile"; b.setAttribute("aria-pressed", "false"); b.setAttribute("aria-label", "ты");
+    b.style.background = `linear-gradient(135deg, hsl(${i * 40} 80% 62%), hsl(${i * 40 + 40} 75% 52%))`;
+    b.innerHTML = `<span>${f}</span><em>ты</em>`;
+    b.addEventListener("click", () => {
+      const on = b.getAttribute("aria-pressed") === "true";
+      b.setAttribute("aria-pressed", String(!on));
+      if (on) { picked.delete(i); b.querySelector(".chk")?.remove(); } else { picked.add(i); const c = document.createElement("i"); c.className = "chk"; c.textContent = "✓"; b.append(c); sfx.pick(); vibrate(12); }
+      gverify.disabled = picked.size === 0;
+      hint(ghint, picked.size >= 9 ? "Ну очевидно же — тут везде ты 😍" : picked.size ? "Верно… и вот тут тоже ты 👀" : "");
+    });
+    grid.append(b);
+  });
+  gverify.addEventListener("click", async () => {
+    sfx.click(); gverify.disabled = true;
+    if (picked.size < FACES.length) { hint(ghint, "Ты пропустила пару штук — там ведь тоже ты 🙃"); grid.querySelectorAll('.tile[aria-pressed="false"]').forEach(t => t.click()); await wait(1100); }
+    hint(ghint, "Проверяем…"); await wait(900); sfx.ok(); vibrate(30); hint(ghint, "100% совпадение. Ты — это ты, и это прекрасно 💫"); await wait(1400); await go("#s2"); runScan();
+  });
+
+  /* ---------- 3: сканирование ---------- */
   function countUp(el, from, to, ms, ease) {
     return new Promise(res => {
       if (reduce) { el.textContent = to + "%"; return res(); }
       const t0 = performance.now();
-      const step = now => {
-        const k = Math.min(1, (now - t0) / ms), e = ease === "in" ? k * k : 1 - Math.pow(1 - k, 3);
-        el.textContent = Math.round(from + (to - from) * e) + "%";
-        k < 1 ? requestAnimationFrame(step) : res();
-      };
+      const step = now => { const k = Math.min(1, (now - t0) / ms), e = ease === "in" ? k * k : 1 - Math.pow(1 - k, 3); el.textContent = Math.round(from + (to - from) * e) + "%"; k < 1 ? requestAnimationFrame(step) : res(); };
       requestAnimationFrame(step);
     });
   }
   let scanned = false;
   async function runScan() {
-    if (scanned) return;
-    scanned = true;
-    await wait(500);
+    if (scanned) return; scanned = true; await wait(500);
     for (const li of document.querySelectorAll("#meters li")) {
-      const b = li.querySelector("b"), em = li.querySelector("em");
-      em.style.width = "100%";
-      await countUp(b, 0, 100, 900);
-      if (li.classList.contains("over")) {
-        li.classList.add("broken"); sfx.error(); vibrate([40, 30, 70]); shake(card);
-        await countUp(b, 100, 999, 1000, "in");
-        b.textContent = "∞";
-      } else sfx.tick();
-      await wait(160);
+      const b = li.querySelector("b"), em = li.querySelector("em"); em.style.width = "100%";
+      await countUp(b, 0, 100, 850);
+      if (li.classList.contains("over")) { li.classList.add("broken"); sfx.error(); vibrate([40, 30, 70]); shake(card); await countUp(b, 100, 999, 1000, "in"); b.textContent = "∞"; } else sfx.tick();
+      await wait(150);
     }
-    $("#scanner").classList.add("done");
-    $("#scanTitle").textContent = "Сканирование завершено";
-    const err = $("#scanErr"); err.hidden = false; err.classList.add("glitch");
-    await wait(700);
-    $("#toQ").hidden = false;
+    $("#scanner").classList.add("done"); $("#scanTitle").textContent = "Сканирование завершено";
+    const err = $("#scanErr"); err.hidden = false; err.classList.add("glitch"); await wait(700); $("#toQ").hidden = false;
   }
-  $("#toQ").addEventListener("click", () => { sfx.click(); go("#s3"); });
+  $("#toQ").addEventListener("click", () => { sfx.click(); startQuiz(); });
 
-  /* ---------- 3. вопрос с убегающей кнопкой «Нет» ---------- */
+  /* ---------- 4: викторина (любой ответ — правильный) ---------- */
+  const QUIZ = [
+    { q: "Насколько ты сегодня прекрасна?", a: ["Очень", "Максимально"], r: "Согласны на все 100 ✅" },
+    { q: "Твоя улыбка — это…", a: ["Просто милота", "Оружие массового обаяния"], r: "Зафиксировано. Опасно хороша 😏" },
+    { q: "Сколько людей ты уже сегодня осчастливила?", a: ["Парочку", "Даже не считала"], r: "Как минимум одного — того, кто прислал эту ссылку 💛" },
+  ];
+  let qi = 0;
+  function startQuiz() { qi = 0; go("#sQ").then(renderQuiz); }
+  function renderQuiz() {
+    const item = QUIZ[qi];
+    $("#qcount").textContent = `Вопрос ${qi + 1} из ${QUIZ.length}`;
+    $("#qtext").textContent = item.q; $("#quizHint").textContent = "";
+    const box = $("#qopts"); box.innerHTML = "";
+    item.a.forEach(label => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = label;
+      b.addEventListener("click", async () => {
+        if (box.dataset.lock) return; box.dataset.lock = "1";
+        b.classList.add("picked"); sfx.pick(); vibrate(15); hint($("#quizHint"), item.r); await wait(1150);
+        qi++; delete box.dataset.lock;
+        if (qi < QUIZ.length) renderQuiz(); else go("#s3");
+      });
+      box.append(b);
+    });
+  }
+
+  /* ---------- 5: вопрос с убегающей кнопкой «Нет» ---------- */
   const yes = $("#yes"), no = $("#no"), qhint = $("#qhint");
   const NO_TEXT = ["Нет", "Точно нет?", "Подумай ещё 🥺", "Скромность — это мило", "Неправильный ответ 🙅‍♀️", "Кнопка устала бегать 😮‍💨", "Ну пожалуйста 🙏", "Последний шанс!"];
   const NO_HINT = ["Промах 😜", "Кнопка «Нет» стесняется", "Не догонишь 🏃‍♀️", "Ответ «Нет» временно недоступен", "Сервер говорит: неправильно 🙂", "Кнопка просит пощады", "Даже кнопка с тобой не согласна", "Всё, кнопка «Нет» уволилась 🫡"];
   let noTries = 0, noLast = 0, holder = null;
   function placeNo(px, py) {
-    const w = no.offsetWidth, h = no.offsetHeight, pad = 14, top = 64;
-    const yr = yes.getBoundingClientRect();
+    const w = no.offsetWidth, h = no.offsetHeight, pad = 14, top = 64, yr = yes.getBoundingClientRect();
     let pick = null;
     for (let i = 0; i < 40 && !pick; i++) {
-      const x = pad + Math.random() * Math.max(1, innerWidth - w - pad * 2);
-      const y = top + Math.random() * Math.max(1, innerHeight - h - top - pad);
+      const x = pad + Math.random() * Math.max(1, innerWidth - w - pad * 2), y = top + Math.random() * Math.max(1, innerHeight - h - top - pad);
       const clear = x + w < yr.left - 12 || x > yr.right + 12 || y + h < yr.top - 12 || y > yr.bottom + 12;
       const far = px == null || Math.hypot(x + w / 2 - px, y + h / 2 - py) > Math.min(180, innerWidth / 3);
       if (clear && far) pick = [x, y];
     }
-    if (!pick) pick = [pad, top];
-    no.style.left = pick[0] + "px"; no.style.top = pick[1] + "px";
+    if (!pick) pick = [pad, top]; no.style.left = pick[0] + "px"; no.style.top = pick[1] + "px";
   }
   function noDodge(e) {
-    if (noTries >= NO_TEXT.length) return;
-    if (e && e.cancelable) e.preventDefault();
-    const now = performance.now();
-    if (now - noLast < 250) return;
-    noLast = now;
-    if (!holder) {                                                // первый раз: кнопка «отрывается» и летает по экрану
-      const r = no.getBoundingClientRect();
-      holder = document.createElement("span");
-      holder.className = "placeholder"; holder.style.width = r.width + "px"; holder.style.height = r.height + "px";
-      no.after(holder);
-      no.classList.add("flying"); no.style.left = r.left + "px"; no.style.top = r.top + "px";
-      document.body.append(no);
-      void no.offsetWidth;
-    }
-    noTries++;
-    sfx.boing(); vibrate(20);
-    hint(qhint, NO_HINT[noTries - 1]);
-    yes.style.transform = `scale(${Math.min(1.6, 1 + noTries * .08)})`;
-    if (noTries >= NO_TEXT.length) {
-      no.classList.add("poof");
-      setTimeout(() => {
-        no.remove(); holder && holder.remove();
-        yes.style.transform = "scale(1.06)";
-        yes.textContent = "Да, я самая классная 😌";
-        yes.classList.add("pulse", "shine");
-      }, 380);
-      return;
-    }
-    no.textContent = NO_TEXT[noTries];
-    placeNo(e && e.clientX != null ? e.clientX : null, e && e.clientY != null ? e.clientY : null);
+    if (noTries >= NO_TEXT.length) return; if (e && e.cancelable) e.preventDefault();
+    const now = performance.now(); if (now - noLast < 250) return; noLast = now;
+    if (!holder) { const r = no.getBoundingClientRect(); holder = document.createElement("span"); holder.className = "placeholder"; holder.style.width = r.width + "px"; holder.style.height = r.height + "px"; no.after(holder); no.classList.add("flying"); no.style.left = r.left + "px"; no.style.top = r.top + "px"; document.body.append(no); void no.offsetWidth; }
+    noTries++; sfx.boing(); vibrate(20); hint(qhint, NO_HINT[noTries - 1]); yes.style.transform = `scale(${Math.min(1.6, 1 + noTries * .08)})`;
+    if (noTries >= NO_TEXT.length) { no.classList.add("poof"); setTimeout(() => { no.remove(); holder && holder.remove(); yes.style.transform = "scale(1.06)"; yes.textContent = "Да, я самая классная 😌"; yes.classList.add("pulse", "shine"); }, 380); return; }
+    no.textContent = NO_TEXT[noTries]; placeNo(e && e.clientX != null ? e.clientX : null, e && e.clientY != null ? e.clientY : null);
   }
   no.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") noDodge(e); });
   no.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") noDodge(e); });
   no.addEventListener("click", e => { e.preventDefault(); if (performance.now() - noLast > 450) noDodge(e); });
-  addEventListener("resize", () => {
-    sizeCanvas();
-    if (holder && no.isConnected) placeNo(null, null);
-  });
+  addEventListener("resize", () => { sizeCanvas(); if (holder && no.isConnected) placeNo(null, null); });
   yes.addEventListener("click", async () => {
-    unlock(); sfx.fanfare(); vibrate([30, 40, 30, 40, 90]);
-    if (no.isConnected && no.classList.contains("flying")) no.remove();
-    if (holder) holder.remove();
-    await go("#s4");
-    finale();
+    prime(); sfx.fanfare(); vibrate([30, 40, 30, 40, 90]);
+    if (no.isConnected && no.classList.contains("flying")) no.remove(); if (holder) holder.remove();
+    await go("#s4"); finale();
   });
 
-  /* ---------- 4. финал ---------- */
+  /* ---------- финал ---------- */
   async function finale() {
     pageTitle = "Это пранк! 😄"; document.title = pageTitle;
     const t = $("#prank"); t.textContent = "";
-    [...t.dataset.text].forEach((ch, i) => {
-      const s = document.createElement("span");
-      s.className = "ch"; s.textContent = ch === " " ? " " : ch; s.style.animationDelay = i * .06 + "s";
-      t.append(s);
-    });
-    celebrate();
-    await wait(1150);
-    $("#stamp").classList.add("slam");
-    await wait(250);
-    sfx.thud(); vibrate(70); shake($("#cert"));
+    [...t.dataset.text].forEach((ch, i) => { const s = document.createElement("span"); s.className = "ch"; s.textContent = ch === " " ? " " : ch; s.style.animationDelay = i * .06 + "s"; t.append(s); });
+    celebrate(); await wait(1150); $("#stamp").classList.add("slam"); await wait(250); sfx.thud(); vibrate(70); shake($("#cert"));
   }
   $("#certDate").textContent = "Выдан " + new Date().toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
-  document.addEventListener("pointerdown", e => {                // в финале любой тап — ещё немного конфетти
-    if (current.id === "s4" && !e.target.closest("button")) { burst(e.clientX, e.clientY, 26, Math.PI * 2, 0, 8); sfx.tick(); }
-  });
+  document.addEventListener("pointerdown", e => { if (current.id === "s4" && !$("#booth").classList.contains("open") && !e.target.closest("button")) { burst(e.clientX, e.clientY, 26, Math.PI * 2, 0, 8); sfx.tick(); } });
   $("#again").addEventListener("click", () => location.reload());
+
+  /* ---------- генератор комплиментов ---------- */
+  const COMPS = [
+    "С тобой даже пятница завидует твоему настроению.",
+    "Ты умеешь делать обычный день чуть теплее.",
+    "Официально: рядом с тобой всем уютнее.",
+    "Твой смех надо занести в список исчезающих сокровищ.",
+    "Ты из тех людей, которых хочется цитировать.",
+    "Если бы обаяние измеряли в мегабайтах, у тебя был бы терабайт.",
+    "Ты справляешься лучше, чем думаешь. Правда.",
+    "Вселенная явно старалась, когда делала тебя.",
+    "Твоя доброта — как Wi-Fi: незаметно, но без неё тяжело.",
+    "Ты — причина, по которой у кого-то сегодня улыбка.",
+    "Классная, умная и ещё и это читаешь — идеально.",
+    "У тебя талант быть собой, и он редкий.",
+  ];
+  let ci = 0;
+  $("#moreComp").addEventListener("click", () => {
+    ci = (ci + 1 + (Math.random() * (COMPS.length - 1) | 0)) % COMPS.length;
+    const el = $("#compliment"); el.textContent = COMPS[ci]; el.classList.remove("swap"); void el.offsetWidth; el.classList.add("swap");
+    sfx.pick(); vibrate(12); if (!reduce) burst(innerWidth / 2, innerHeight * .5, 14, Math.PI * 2, 0, 6);
+  });
 
   /* ---------- сертификат картинкой ---------- */
   function rr(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
   function glow(g, x, y, r, c) { const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, c); gr.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
+  async function shareOrDownload(blob, filename, title) {
+    const file = new File([blob], filename, { type: "image/png" });
+    try { if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title }); return "shared"; } } catch (e) { if (e.name === "AbortError") return "cancel"; }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = filename; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); return "download";
+  }
   $("#save").addEventListener("click", async () => {
     sfx.click();
     try { await Promise.all(['800 90px "Unbounded"', '700 34px "Unbounded"', '600 40px "Manrope"', '500 30px "Manrope"'].map(f => document.fonts.load(f))); } catch (e) {}
-    const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
-    const g = c.getContext("2d");
-    const bg = g.createLinearGradient(0, 0, W, H); bg.addColorStop(0, "#2a1257"); bg.addColorStop(1, "#5e1540");
-    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H; const g = c.getContext("2d");
+    const bg = g.createLinearGradient(0, 0, W, H); bg.addColorStop(0, "#2a1257"); bg.addColorStop(1, "#5e1540"); g.fillStyle = bg; g.fillRect(0, 0, W, H);
     glow(g, 160, 180, 420, "rgba(139,92,246,.6)"); glow(g, 940, 1180, 460, "rgba(255,79,163,.5)");
     g.fillStyle = "#fff"; g.textAlign = "center"; g.font = '700 44px "Unbounded", sans-serif'; g.fillText("🎉  Это был пранк  🎉", W / 2, 150);
     rr(g, 80, 220, W - 160, 900, 46); g.fillStyle = "#fffaf3"; g.fill();
@@ -634,31 +668,60 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
     let size = 96; do { g.font = `800 ${size}px "Unbounded", sans-serif`; size -= 4; } while (g.measureText(NAME).width > W - 300 && size > 40);
     g.fillStyle = "#d6246e"; g.fillText(NAME, W / 2, 600);
     g.fillStyle = "#2a1a33"; g.font = '600 40px "Manrope", sans-serif'; g.fillText("— официально самая классная", W / 2, 690);
-    g.fillStyle = "#7a6a86"; g.font = '500 30px "Manrope", sans-serif';
-    g.fillText("Проверено сканером. Возражения не принимаются:", W / 2, 790); g.fillText("кнопка «Нет» уволилась.", W / 2, 834);
-    g.font = '600 28px "Manrope", sans-serif'; g.textAlign = "left"; g.fillText($("#certDate").textContent, 160, 1040);
-    g.textAlign = "right"; g.fillText("Действует всегда", W - 160, 1040);
-    g.save(); g.translate(W - 320, 930); g.rotate(-.24); g.globalAlpha = .9;
-    g.strokeStyle = "#e11d48"; g.lineWidth = 8; rr(g, -175, -58, 350, 116, 18); g.stroke();
-    g.fillStyle = "#e11d48"; g.font = '800 52px "Unbounded", sans-serif'; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("ОДОБРЕНО", 0, 4); g.restore();
+    g.fillStyle = "#7a6a86"; g.font = '500 30px "Manrope", sans-serif'; g.fillText("Проверено сканером. Возражения не принимаются:", W / 2, 790); g.fillText("кнопка «Нет» уволилась.", W / 2, 834);
+    g.font = '600 28px "Manrope", sans-serif'; g.textAlign = "left"; g.fillText($("#certDate").textContent, 160, 1040); g.textAlign = "right"; g.fillText("Действует всегда", W - 160, 1040);
+    g.save(); g.translate(W - 320, 930); g.rotate(-.24); g.globalAlpha = .9; g.strokeStyle = "#e11d48"; g.lineWidth = 8; rr(g, -175, -58, 350, 116, 18); g.stroke(); g.fillStyle = "#e11d48"; g.font = '800 52px "Unbounded", sans-serif'; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("ОДОБРЕНО", 0, 4); g.restore();
     g.fillStyle = "rgba(255,255,255,.85)"; g.textAlign = "center"; g.font = '600 32px "Manrope", sans-serif'; g.fillText("Хорошего дня! 💐", W / 2, 1230);
-    c.toBlob(async blob => {
-      if (!blob) return toast("Не получилось 😅");
-      const file = new File([blob], `Сертификат — ${NAME}.png`, { type: "image/png" });
-      try {
-        if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "Сертификат" }); return; }
-      } catch (e) { if (e.name === "AbortError") return; }
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob); a.download = file.name; document.body.append(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-      toast("Сертификат сохранён 📜");
-    }, "image/png");
+    c.toBlob(async blob => { if (!blob) return toast("Не получилось 😅"); const how = await shareOrDownload(blob, `Сертификат — ${NAME}.png`, "Сертификат"); if (how === "download") toast("Сертификат сохранён 📜"); }, "image/png");
   });
 
-  /* ---------- ?stage=N — открыть сразу нужный шаг (для проверки) ---------- */
+  /* ---------- фотобудка: только по желанию, всё на устройстве ---------- */
+  const booth = $("#booth"), cam = $("#cam"), snap = $("#snap"), shotRow = $("#shotRow"), boothHint = $("#boothHint");
+  let stream = null, shotBlob = null, shotCanvas = null;
+  function stopCam() { if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; } }
+  function closeBooth() { stopCam(); booth.classList.remove("open"); const im = $("#frame img"); if (im) im.remove(); cam.hidden = false; shotRow.hidden = true; snap.hidden = false; shotBlob = null; }
+  $("#selfie").addEventListener("click", async () => {
+    sfx.click();
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { toast("Камера недоступна, но ты всё равно лучшая 💛"); return; }
+    booth.classList.add("open"); boothHint.textContent = "Разреши доступ к камере 💖"; cam.hidden = false; shotRow.hidden = true; snap.hidden = false;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 1280 } }, audio: false });
+      cam.srcObject = stream; await cam.play().catch(() => {}); boothHint.textContent = "Наведи камеру на себя 💖";
+    } catch (e) { toast(e && e.name === "NotAllowedError" ? "Без камеры тоже отлично 💛" : "Камера недоступна 💛"); closeBooth(); }
+  });
+  $("#closeBooth").addEventListener("click", () => { sfx.click(); closeBooth(); });
+  snap.addEventListener("click", async () => {
+    if (!stream) return; snap.disabled = true; sfx.click();
+    const count = $("#count"); count.hidden = false;
+    for (const n of ["3", "2", "1"]) { count.textContent = n; count.classList.remove("go"); void count.offsetWidth; count.classList.add("go"); sfx.tick(); await wait(750); }
+    count.hidden = true;
+    const flash = $("#flash"); flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go"); sfx.shutter(); vibrate(40);
+    // рисуем кадр + рамку «самая классная»
+    const vw = cam.videoWidth || 720, vh = cam.videoHeight || 960, tw = 900, th = 1200;
+    const c = document.createElement("canvas"); c.width = tw; c.height = th; const g = c.getContext("2d");
+    const sc = Math.max(tw / vw, th / vh), dw = vw * sc, dh = vh * sc;
+    g.save(); g.translate(tw, 0); g.scale(-1, 1); g.drawImage(cam, (tw - dw) / 2, (th - dh) / 2, dw, dh); g.restore();   // зеркалим, как в обычной фронталке
+    const grd = g.createLinearGradient(0, th * .6, 0, th); grd.addColorStop(0, "rgba(0,0,0,0)"); grd.addColorStop(1, "rgba(0,0,0,.55)"); g.fillStyle = grd; g.fillRect(0, th * .6, tw, th * .4);
+    g.textAlign = "center"; g.font = '60px "Segoe UI Emoji", sans-serif'; g.fillText("👑", tw / 2, 96);
+    try { await document.fonts.load('800 66px "Unbounded"'); } catch (e) {}
+    g.fillStyle = "#fff"; g.font = '800 66px "Unbounded", sans-serif'; g.fillText("самая классная", tw / 2, th - 96);
+    g.font = '700 30px "Manrope", sans-serif'; g.fillStyle = "rgba(255,255,255,.9)"; g.fillText(NAME.toUpperCase(), tw / 2, th - 52);
+    shotCanvas = c;
+    const url = c.toDataURL("image/png");
+    const img = document.createElement("img"); img.className = "mirror"; img.alt = "Твоё селфи"; img.src = url; img.style.transform = "none"; $("#frame").append(img);
+    cam.hidden = true; stopCam(); snap.hidden = true; snap.disabled = false; shotRow.hidden = false; boothHint.textContent = "Готово! Можешь сохранить 💫"; sfx.ok();
+  });
+  $("#retake").addEventListener("click", async () => { sfx.click(); const im = $("#frame img"); if (im) im.remove(); $("#selfie").click(); });
+  $("#shareShot").addEventListener("click", async () => {
+    if (!shotCanvas) return; sfx.click();
+    shotCanvas.toBlob(async blob => { if (!blob) return toast("Не получилось 😅"); const how = await shareOrDownload(blob, `Селфи — ${NAME}.png`, "Моё селфи"); if (how === "download") toast("Селфи сохранено 📸"); }, "image/png");
+  });
+
+  /* ---------- ?stage=N — открыть нужный шаг сразу (для проверки) ---------- */
   const st = qs.get("stage");
-  if (st && $("#s" + st)) {
-    go("#s" + st).then(() => { if (st === "2") runScan(); if (st === "4") finale(); });
+  if (st) {
+    if (st === "Q") startQuiz();
+    else if ($("#s" + st)) go("#s" + st).then(() => { if (st === "2") runScan(); if (st === "4") finale(); });
   }
 })();
 </script>
