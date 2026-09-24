@@ -197,9 +197,16 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
 .frame { position: relative; aspect-ratio: 3/4; border-radius: 22px; overflow: hidden; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,.5); border: 3px solid transparent; background-image: linear-gradient(#000,#000), linear-gradient(135deg,var(--pink),var(--violet),var(--orange)); background-origin: border-box; background-clip: padding-box, border-box; }
 .frame video, .frame canvas, .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .frame video, .frame .mirror { transform: scaleX(-1); }
-.frame .crown { position: absolute; left: 0; right: 0; top: 12px; text-align: center; font-size: 34px; filter: drop-shadow(0 3px 8px rgba(0,0,0,.5)); pointer-events: none; }
-.frame .cap { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font: 800 19px/1 var(--display); color: #fff; text-shadow: 0 3px 12px rgba(0,0,0,.6); pointer-events: none; }
-.frame .cap small { display: block; font: 700 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: 5px; }
+.frame video { filter: saturate(1.12) brightness(1.06) contrast(1.02); }   /* лёгкий beauty-эффект вживую */
+.frame .vig { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 70px rgba(0,0,0,.4), inset 0 0 26px rgba(255,120,180,.14); }
+.frame .deco { position: absolute; font-size: 26px; pointer-events: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); animation: floaty 3.6s ease-in-out infinite alternate; }
+.frame .d1 { left: 10px; top: 54px; } .frame .d2 { right: 12px; top: 74px; animation-delay: .6s; }
+.frame .d3 { left: 14px; bottom: 104px; animation-delay: 1.2s; } .frame .d4 { right: 16px; bottom: 128px; animation-delay: .3s; }
+@keyframes floaty { to { transform: translateY(-8px) rotate(8deg); } }
+.frame .crown { position: absolute; left: 0; right: 0; top: 14px; text-align: center; font-size: 40px; filter: drop-shadow(0 3px 10px rgba(0,0,0,.5)); pointer-events: none; animation: bounce 1.6s var(--spring) infinite alternate; }
+.frame .cap { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); text-align: center; padding: 9px 18px; border-radius: 15px; background: linear-gradient(135deg, rgba(255,79,163,.94), rgba(139,92,246,.94)); box-shadow: 0 8px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.25); pointer-events: none; }
+.frame .cap b { font: 800 19px/1 var(--display); color: #fff; }
+.frame .cap small { display: block; font: 700 10px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.92); margin-top: 5px; }
 .count { position: absolute; inset: 0; display: grid; place-items: center; font: 800 90px/1 var(--display); color: #fff; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
 .count.go { animation: cnt 1s var(--spring); }
 @keyframes cnt { from { transform: scale(2.4); opacity: 0; } 40% { opacity: 1; } to { transform: scale(1); opacity: .0; } }
@@ -328,8 +335,10 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   <div class="inner">
     <div class="frame" id="frame">
       <video id="cam" playsinline autoplay muted></video>
+      <div class="vig"></div>
+      <div class="deco d1">✨</div><div class="deco d2">💕</div><div class="deco d3">🌸</div><div class="deco d4">✨</div>
       <div class="crown">👑</div>
-      <div class="cap" id="camCap">самая классная<small data-name>Айжан</small></div>
+      <div class="cap" id="camCap"><b>самая классная</b><small data-name>Айжан</small></div>
       <div class="count" id="count" hidden></div>
       <div class="flash" id="flash"></div>
     </div>
@@ -366,7 +375,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   let tt; const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 2400); };
 
   /* ---------- звук: Web Audio + мастер-громкость, разблокировка на первом жесте ---------- */
-  let ac = null, master = null, announced = false;
+  let ac = null, master = null, reverb = null, revGain = null, announced = false;
   let muted = false; try { muted = localStorage.getItem("prank-muted") === "1"; } catch (e) {}
   const soundBtn = $("#sound");
   const paintSound = () => { soundBtn.textContent = muted ? "🔇" : "🔊"; soundBtn.setAttribute("aria-label", muted ? "Включить звук" : "Выключить звук"); };
@@ -377,6 +386,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
         const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
         ac = new AC(); master = ac.createGain(); master.gain.value = muted ? 0 : .9; master.connect(ac.destination);
         try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}   // iOS: играть даже при беззвучном переключателе (Safari 16.4+)
+        try { reverb = ac.createConvolver(); reverb.buffer = makeIR(1.8, 3.2); revGain = ac.createGain(); revGain.gain.value = .5; reverb.connect(revGain); revGain.connect(master); } catch (e) {}   // немного «пространства» для мягкого звука
       }
       if (ac.state !== "running") ac.resume();
     } catch (e) {}
@@ -395,26 +405,46 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   }
   ["pointerdown", "touchstart", "keydown", "click"].forEach(ev => addEventListener(ev, prime, { passive: true }));
   document.addEventListener("visibilitychange", () => { if (!document.hidden) ensureAudio(); });
-  function tone(freq, dur = .12, type = "sine", vol = .12, when = 0, slideTo = 0) {
-    if (muted) return; ensureAudio(); if (!ac || !master) return;
-    try {
-      const t = ac.currentTime + when, o = ac.createOscillator(), g = ac.createGain();
-      o.type = type; o.frequency.setValueAtTime(freq, t);
-      if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
-      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
-      o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .03);
-    } catch (e) {}
+  function makeIR(sec, decay) {                        // короткая реверберация, генерится программно
+    const rate = ac.sampleRate, len = Math.max(1, rate * sec | 0), buf = ac.createBuffer(2, len, rate);
+    for (let ch = 0; ch < 2; ch++) { const d = buf.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay); }
+    return buf;
+  }
+  const ready = () => { if (muted) return false; ensureAudio(); return !!(ac && master); };
+  function voice(freq, t, dur, type, vol, a, slideTo, rev, filt) {           // мягкий синтез-голос: атака/спад, опц. фильтр и реверб
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + (a || .006)); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    if (filt) { const f = ac.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = filt; o.connect(f); f.connect(g); } else o.connect(g);
+    g.connect(master); if (rev && reverb) g.connect(reverb);
+    o.start(t); o.stop(t + dur + .05);
+  }
+  function bell(freq, t, dur, vol, rev) {                                    // колокольчик: несколько обертонов = «дорогой» звук
+    voice(freq, t, dur, "sine", vol, .004, 0, rev);
+    voice(freq * 2.01, t, dur * .6, "sine", vol * .45, .004, 0, rev);
+    voice(freq * 3.0, t, dur * .35, "sine", vol * .2, .004, 0, rev);
+  }
+  function noise(t, dur, vol, type, f0, f1, q, rev) {                        // отфильтрованный шум: клики, вжух, затвор
+    const len = Math.max(1, (ac.sampleRate * dur) | 0), b = ac.createBuffer(1, len, ac.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const s = ac.createBufferSource(); s.buffer = b;
+    const flt = ac.createBiquadFilter(); flt.type = type; flt.frequency.setValueAtTime(f0, t); if (f1 && f1 !== f0) flt.frequency.exponentialRampToValueAtTime(f1, t + dur); flt.Q.value = q || 1;
+    const g = ac.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .008); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    s.connect(flt); flt.connect(g); g.connect(master); if (rev && reverb) g.connect(reverb);
+    s.start(t); s.stop(t + dur + .05);
   }
   const sfx = {
-    click: () => tone(560, .1, "triangle", .16),
-    boing: () => tone(240, .26, "triangle", .2, 0, 900),
-    tick: () => tone(1250, .05, "square", .08),
-    pick: () => { tone(720, .08, "triangle", .1); tone(1080, .1, "sine", .08, .06); },
-    ok: () => { tone(660, .12, "sine", .13); tone(990, .2, "sine", .12, .1); },
-    error: () => { tone(130, .4, "sawtooth", .1); tone(138, .4, "sawtooth", .08); },
-    thud: () => { tone(150, .22, "sine", .3, 0, 55); tone(90, .14, "square", .06); },
-    shutter: () => { tone(1800, .03, "square", .12); tone(500, .06, "sine", .1, .03); },
-    fanfare: () => { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, .22, "triangle", .13, i * .11)); tone(1046.5, .75, "triangle", .1, .55); tone(1318.5, .75, "sine", .07, .55); },
+    click() { if (!ready()) return; const t = ac.currentTime; voice(600, t, .09, "sine", .16, .003, 950); noise(t, .025, .04, "highpass", 3000, 3000, 1); },
+    pick() { if (!ready()) return; const t = ac.currentTime; voice(900, t, .1, "sine", .14, .003, 1300, 1); },
+    tick() { if (!ready()) return; const t = ac.currentTime; voice(2100, t, .03, "sine", .06, .002); },
+    ok() { if (!ready()) return; const t = ac.currentTime; bell(784, t, .5, .14, 1); bell(1046.5, t + .07, .6, .12, 1); },
+    boing() { if (!ready()) return; const t = ac.currentTime; noise(t, .2, .09, "bandpass", 500, 1700, 2, 1); voice(520, t, .16, "sine", .1, .003, 920); },
+    error() { if (!ready()) return; const t = ac.currentTime; voice(220, t, .3, "sine", .16, .004, 150, 1, 600); noise(t, .05, .04, "lowpass", 800, 400, 1); },
+    whoosh() { if (!ready()) return; const t = ac.currentTime; noise(t, .28, .08, "bandpass", 300, 3600, .7, 1); },
+    shutter() { if (!ready()) return; const t = ac.currentTime; noise(t, .02, .16, "highpass", 4500, 4500, 1); noise(t + .03, .035, .12, "highpass", 2500, 2500, 1); },
+    thud() { if (!ready()) return; const t = ac.currentTime; voice(165, t, .32, "sine", .3, .004, 55, 1); noise(t, .05, .05, "lowpass", 500, 200, 1); },
+    fanfare() { if (!ready()) return; const t = ac.currentTime; [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => bell(f, t + i * .12, .75, .14, 1)); bell(1318.5, t + .5, 1.1, .1, 1); noise(t + .5, .6, .05, "highpass", 5000, 9000, .8, 1); },
   };
   soundBtn.addEventListener("click", () => {
     muted = !muted; try { localStorage.setItem("prank-muted", muted ? "1" : "0"); } catch (e) {}
@@ -427,7 +457,15 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   const mf = m => 440 * Math.pow(2, (m - 69) / 12);                    // номер ноты MIDI -> частота
   const CHORDS = [[60, 64, 67], [55, 59, 62], [57, 60, 64], [53, 57, 60]];   // C · G · Am · F — «счастливая» последовательность
   const BASS = [36, 43, 45, 41], ARP = [0, 1, 2, 1, 0, 2, 1, 2];
-  function initMusic() { ensureAudio(); if (ac && master && !musicGain) { musicGain = ac.createGain(); musicGain.gain.value = 0; musicGain.connect(master); } }
+  function initMusic() {
+    ensureAudio();
+    if (ac && master && !musicGain) {
+      musicGain = ac.createGain(); musicGain.gain.value = 0;
+      const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 4000; lp.Q.value = .4;   // мягче, теплее
+      musicGain.connect(lp); lp.connect(master);
+      if (reverb) { const rs = ac.createGain(); rs.gain.value = .22; musicGain.connect(rs); rs.connect(reverb); }
+    }
+  }
   function mnote(freq, t, dur, type, vol) {
     if (!ac || !musicGain) return;
     const o = ac.createOscillator(), g = ac.createGain();
@@ -518,7 +556,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   let current = $("#s0");
   async function go(id) {
     const next = $(id); if (!next || next === current) return;
-    ensureAudio();
+    ensureAudio(); sfx.whoosh();
     current.classList.remove("active"); current.classList.add("leaving");
     await wait(320); current.classList.remove("leaving");
     next.classList.add("active"); current = next;
@@ -757,16 +795,41 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
     // рисуем кадр + рамку «самая классная»
     const vw = cam.videoWidth || 720, vh = cam.videoHeight || 960, tw = 900, th = 1200;
     const c = document.createElement("canvas"); c.width = tw; c.height = th; const g = c.getContext("2d");
-    const sc = Math.max(tw / vw, th / vh), dw = vw * sc, dh = vh * sc;
-    g.save(); g.translate(tw, 0); g.scale(-1, 1); g.drawImage(cam, (tw - dw) / 2, (th - dh) / 2, dw, dh); g.restore();   // зеркалим, как в обычной фронталке
-    const grd = g.createLinearGradient(0, th * .6, 0, th); grd.addColorStop(0, "rgba(0,0,0,0)"); grd.addColorStop(1, "rgba(0,0,0,.55)"); g.fillStyle = grd; g.fillRect(0, th * .6, tw, th * .4);
-    g.textAlign = "center"; g.font = '60px "Segoe UI Emoji", sans-serif'; g.fillText("👑", tw / 2, 96);
-    try { await document.fonts.load('800 66px "Unbounded"'); } catch (e) {}
-    g.fillStyle = "#fff"; g.font = '800 66px "Unbounded", sans-serif'; g.fillText("самая классная", tw / 2, th - 96);
-    g.font = '700 30px "Manrope", sans-serif'; g.fillStyle = "rgba(255,255,255,.9)"; g.fillText(NAME.toUpperCase(), tw / 2, th - 52);
+    const sc = Math.max(tw / vw, th / vh), dw = vw * sc, dh = vh * sc, dx = (tw - dw) / 2, dy = (th - dh) / 2;
+    // 1) кадр (зеркально, как во фронталке)
+    g.save(); g.translate(tw, 0); g.scale(-1, 1); g.drawImage(cam, dx, dy, dw, dh); g.restore();
+    // 2) мягкое свечение (beauty): размытую светлую копию накладываем сверху
+    try {
+      const soft = document.createElement("canvas"); soft.width = tw; soft.height = th; const sg = soft.getContext("2d");
+      sg.filter = "blur(9px) brightness(1.25) saturate(1.15)"; sg.save(); sg.translate(tw, 0); sg.scale(-1, 1); sg.drawImage(cam, dx, dy, dw, dh); sg.restore();
+      g.globalAlpha = .28; g.globalCompositeOperation = "screen"; g.drawImage(soft, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = "source-over";
+    } catch (e) {}
+    // 3) тёплый тон + виньетка
+    g.fillStyle = "rgba(255,190,140,.06)"; g.fillRect(0, 0, tw, th);
+    const vg = g.createRadialGradient(tw / 2, th / 2, th * .3, tw / 2, th / 2, th * .72);
+    vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(20,6,30,.5)"); g.fillStyle = vg; g.fillRect(0, 0, tw, th);
+    // 4) затемнение снизу под подпись
+    const grd = g.createLinearGradient(0, th * .56, 0, th); grd.addColorStop(0, "rgba(0,0,0,0)"); grd.addColorStop(1, "rgba(10,4,20,.62)"); g.fillStyle = grd; g.fillRect(0, th * .56, tw, th * .44);
+    // 5) градиентная рамка
+    const bw = 12, bg2 = g.createLinearGradient(0, 0, tw, th); bg2.addColorStop(0, "#ff4fa3"); bg2.addColorStop(.5, "#8b5cf6"); bg2.addColorStop(1, "#ffb020");
+    g.strokeStyle = bg2; g.lineWidth = bw; rr(g, bw / 2, bw / 2, tw - bw, th - bw, 40); g.stroke();
+    // 6) корона и блёстки
+    g.textAlign = "center"; g.font = '86px "Segoe UI Emoji","Noto Color Emoji",sans-serif'; g.fillText("👑", tw / 2, 122);
+    g.font = '40px "Segoe UI Emoji","Noto Color Emoji",sans-serif'; g.globalAlpha = .95;
+    g.fillText("✨", 82, 200); g.fillText("💕", tw - 80, 224); g.fillText("🌸", 100, th - 250); g.fillText("✨", tw - 96, th - 272); g.globalAlpha = 1;
+    // 7) подпись-лента с именем и датой
+    try { await Promise.all(['800 70px "Unbounded"', '700 26px "Manrope"'].map(f => document.fonts.load(f))); } catch (e) {}
+    g.font = '800 70px "Unbounded", sans-serif';
+    const label = "самая классная", lw = Math.min(tw - 70, g.measureText(label).width), pad = 34, ph = 122, rx = (tw - lw - pad * 2) / 2, ry = th - 168;
+    const rg = g.createLinearGradient(rx, 0, rx + lw + pad * 2, 0); rg.addColorStop(0, "#ff4fa3"); rg.addColorStop(1, "#8b5cf6");
+    g.fillStyle = rg; rr(g, rx, ry, lw + pad * 2, ph, 26); g.fill();
+    g.fillStyle = "#fff"; g.textBaseline = "middle"; g.fillText(label, tw / 2, ry + ph / 2 - 14, tw - 80);
+    g.font = '700 26px "Manrope", sans-serif'; g.fillStyle = "rgba(255,255,255,.92)";
+    g.fillText(NAME.toUpperCase() + " · " + $("#certDate").textContent.replace("Выдан ", ""), tw / 2, ry + ph / 2 + 30);
+    g.textBaseline = "alphabetic";
     shotCanvas = c;
     const url = c.toDataURL("image/png");
-    const img = document.createElement("img"); img.className = "mirror"; img.alt = "Твоё селфи"; img.src = url; img.style.transform = "none"; $("#frame").append(img);
+    const img = document.createElement("img"); img.alt = "Твоё селфи"; img.src = url; $("#frame").append(img);
     cam.hidden = true; stopCam(); snap.hidden = true; snap.disabled = false; shotRow.hidden = false; boothHint.textContent = "Готово! Можешь сохранить 💫"; sfx.ok();
   });
   $("#retake").addEventListener("click", async () => { sfx.click(); const im = $("#frame img"); if (im) im.remove(); $("#selfie").click(); });
