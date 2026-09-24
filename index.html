@@ -376,6 +376,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
       if (!ac) {
         const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
         ac = new AC(); master = ac.createGain(); master.gain.value = muted ? 0 : .9; master.connect(ac.destination);
+        try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}   // iOS: играть даже при беззвучном переключателе (Safari 16.4+)
       }
       if (ac.state !== "running") ac.resume();
     } catch (e) {}
