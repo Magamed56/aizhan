@@ -14,6 +14,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#120a22">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -382,7 +385,12 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
     ensureAudio();
     if (!ac) return;
     try { const b = ac.createBuffer(1, 1, 22050), src = ac.createBufferSource(); src.buffer = b; src.connect(master); src.start(0); } catch (e) {}
-    if (ac.state === "running" && !muted && !announced) { announced = true; toast("🔊 Звук включён"); }
+    // resume() асинхронный — дожидаемся, что контекст реально запустился, и только тогда включаем музыку
+    (ac.state === "running" ? Promise.resolve() : ac.resume()).then(() => {
+      if (muted) return;
+      if (!announced) { announced = true; toast("🔊 Звук включён"); }
+      startMusic();
+    }).catch(() => {});
   }
   ["pointerdown", "touchstart", "keydown", "click"].forEach(ev => addEventListener(ev, prime, { passive: true }));
   document.addEventListener("visibilitychange", () => { if (!document.hidden) ensureAudio(); });
@@ -397,9 +405,9 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
     } catch (e) {}
   }
   const sfx = {
-    click: () => tone(560, .09, "triangle", .12),
-    boing: () => tone(240, .26, "triangle", .16, 0, 900),
-    tick: () => tone(1250, .05, "square", .05),
+    click: () => tone(560, .1, "triangle", .16),
+    boing: () => tone(240, .26, "triangle", .2, 0, 900),
+    tick: () => tone(1250, .05, "square", .08),
     pick: () => { tone(720, .08, "triangle", .1); tone(1080, .1, "sine", .08, .06); },
     ok: () => { tone(660, .12, "sine", .13); tone(990, .2, "sine", .12, .1); },
     error: () => { tone(130, .4, "sawtooth", .1); tone(138, .4, "sawtooth", .08); },
@@ -410,7 +418,56 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   soundBtn.addEventListener("click", () => {
     muted = !muted; try { localStorage.setItem("prank-muted", muted ? "1" : "0"); } catch (e) {}
     paintSound(); ensureAudio(); if (master) master.gain.value = muted ? 0 : .9;
-    if (!muted) sfx.ok();
+    if (muted) stopMusic(); else { startMusic(); sfx.ok(); }
+  });
+
+  /* ---------- фоновая музыка: генерится на лету через Web Audio, без файлов ---------- */
+  let musicGain = null, mPlaying = false, mTimer = null, mNext = 0, mStep = 0, mBpm = 96, mParty = false;
+  const mf = m => 440 * Math.pow(2, (m - 69) / 12);                    // номер ноты MIDI -> частота
+  const CHORDS = [[60, 64, 67], [55, 59, 62], [57, 60, 64], [53, 57, 60]];   // C · G · Am · F — «счастливая» последовательность
+  const BASS = [36, 43, 45, 41], ARP = [0, 1, 2, 1, 0, 2, 1, 2];
+  function initMusic() { ensureAudio(); if (ac && master && !musicGain) { musicGain = ac.createGain(); musicGain.gain.value = 0; musicGain.connect(master); } }
+  function mnote(freq, t, dur, type, vol) {
+    if (!ac || !musicGain) return;
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); g.connect(musicGain); o.start(t); o.stop(t + dur + .05);
+  }
+  function mhat(t, vol) {
+    if (!ac || !musicGain) return;
+    const len = (ac.sampleRate * .03) | 0, b = ac.createBuffer(1, len, ac.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+    const s = ac.createBufferSource(); s.buffer = b; const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 6500;
+    const g = ac.createGain(); g.gain.value = vol; s.connect(hp); hp.connect(g); g.connect(musicGain); s.start(t);
+  }
+  function mstep(step, t) {
+    const bar = (step >> 3) & 3, beat = step & 7, ch = CHORDS[bar];
+    if (beat % 2 === 0) mnote(mf(BASS[bar]), t, .5, "sine", .18);              // бас
+    const note = ch[ARP[beat]] + (mParty && beat % 2 ? 12 : 0);
+    mnote(mf(note), t, .26, "triangle", .12);                                 // мелодия-арпеджио
+    if (mParty) mnote(mf(note + 12), t, .18, "sine", .05);                    // искорки в финале
+    if (beat === 0) ch.forEach(n => mnote(mf(n + 12), t, 1.7, "sine", .035)); // мягкий «пад» в начале такта
+    if (beat % 2 === 1) mhat(t, mParty ? .05 : .03);                          // хэт на слабую долю
+  }
+  function mscheduler() {
+    if (!mPlaying || !ac) return;
+    const spb = (60 / mBpm) / 2;                                             // восьмая доля
+    while (mNext < ac.currentTime + .12) { mstep(mStep, mNext); mNext += spb; mStep = (mStep + 1) % 32; }
+    mTimer = setTimeout(mscheduler, 25);
+  }
+  function startMusic() {
+    initMusic(); if (!ac || !musicGain || mPlaying || muted) return;
+    mPlaying = true; mNext = ac.currentTime + .1; mStep = 0;
+    musicGain.gain.cancelScheduledValues(ac.currentTime); musicGain.gain.setValueAtTime(musicGain.gain.value, ac.currentTime);
+    musicGain.gain.linearRampToValueAtTime(.7, ac.currentTime + 2);          // плавно появляется
+    mscheduler();
+  }
+  function stopMusic() { mPlaying = false; clearTimeout(mTimer); if (musicGain && ac) musicGain.gain.linearRampToValueAtTime(0, ac.currentTime + .2); }
+  function partyMusic() { mParty = true; mBpm = 120; if (musicGain && ac) musicGain.gain.linearRampToValueAtTime(.9, ac.currentTime + .5); }
+  document.addEventListener("visibilitychange", () => {                      // не играем в фоне вкладки
+    if (document.hidden) { if (mPlaying) { mPlaying = false; clearTimeout(mTimer); } }
+    else if (!muted && musicGain && ac && !mPlaying) { mPlaying = true; mNext = ac.currentTime + .1; mscheduler(); }
   });
 
   /* ---------- искры ---------- */
@@ -615,7 +672,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
 
   /* ---------- финал ---------- */
   async function finale() {
-    pageTitle = "Это пранк! 😄"; document.title = pageTitle;
+    pageTitle = "Это пранк! 😄"; document.title = pageTitle; partyMusic();
     const t = $("#prank"); t.textContent = "";
     [...t.dataset.text].forEach((ch, i) => { const s = document.createElement("span"); s.className = "ch"; s.textContent = ch === " " ? " " : ch; s.style.animationDelay = i * .06 + "s"; t.append(s); });
     celebrate(); await wait(1150); $("#stamp").classList.add("slam"); await wait(250); sfx.thud(); vibrate(70); shake($("#cert"));
