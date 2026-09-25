@@ -27,3 +27,31 @@ https://<логин>.github.io/aizhan/?name=Динара
 ## Локально
 
 Просто откройте `index.html` в браузере.
+
+## Встроить в другой проект
+
+Весь пранк упакован в один файл **`prank-embed.js`** (собирается из `index.html` командой
+`python build_embed.py`). Он вставляет страницу в изолированный iframe, ничего не ломая в чужом проекте.
+Скопируйте `prank-embed.js` к себе (или ссылайтесь на размещённый) и добавьте одну строку:
+
+```html
+<script src="prank-embed.js"></script>
+```
+
+С именем:
+
+```html
+<script src="prank-embed.js" data-name="Динара"></script>
+```
+
+Открывать не сразу, а по кнопке:
+
+```html
+<script src="prank-embed.js" data-auto="off"></script>
+<button onclick="AizhanPrank.open()">Сюрприз</button>
+<!-- закрыть: AizhanPrank.close(); открыть с другим именем: AizhanPrank.open('Азиз') -->
+```
+
+Размещённая версия скрипта: `https://magamed56.github.io/aizhan/prank-embed.js`. Всё работает офлайн;
+камера и звук — только по действию пользователя. Одно условие: страница-хост должна быть на `https://`
+(или `localhost`) — иначе браузер не даст доступ к камере для селфи.

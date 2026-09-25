@@ -361,7 +361,7 @@ main { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; di
   "use strict";
   const $ = s => document.querySelector(s);
   const qs = new URLSearchParams(location.search);
-  const NAME = ((qs.get("name") || "").trim().slice(0, 30)) || "Айжан";
+  const NAME = ((window.PRANK_NAME || qs.get("name") || "").toString().trim().slice(0, 30)) || "Айжан";   // имя: из встраивания (window.PRANK_NAME) или из ?name=
   document.querySelectorAll("[data-name]").forEach(e => (e.textContent = NAME));
   $("#initial").textContent = NAME[0].toUpperCase();
   let pageTitle = `${NAME}, это важно ❗`;
